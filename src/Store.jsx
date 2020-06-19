@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
 window.globalStorage = {
     config: {},
@@ -27,8 +26,4 @@ export const StoreProvider = (props) => {
             {props.children}
         </StoreContext.Provider>
     );
-};
-
-StoreProvider.propTypes = {
-    children: PropTypes.string
 };

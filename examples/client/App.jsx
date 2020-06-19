@@ -3,6 +3,7 @@ import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import { StoreProvider } from '@src';
 import exampleStore from './store';
+import { Example } from './Example';
 
 let defaultStores = {
     exampleStore
@@ -11,7 +12,7 @@ let defaultStores = {
 const App = () => {
     return (
         <StoreProvider defaultStores={defaultStores}>
-            test
+            <Example />
         </StoreProvider>
     );
 };
