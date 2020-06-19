@@ -10,7 +10,7 @@
   ],
   "extension": "js",
   "jsnext:main": "src/index.jsx",
-  "main": "lib/client/index.js",
+  "main": "lib/index.js",
   "repository": "scripty/store",
   "scripts": {
     "webpack": "node node_modules/webpack/bin/webpack.js --config webpack.config.cjs",
