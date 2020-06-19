@@ -7,8 +7,7 @@ then
   echo "Version muss angegeben werden"
   exit 1
 fi
-${npm_script} run compile
-version=$(${npm_script} --unsafe-perm --no-git-tag-version version ${1})
+version=$(${npm_script} --unsafe-perm --no-git-tag-version --allow-same-version version ${1})
 ${npm_script} publish
 git commit -am "${version}"
 git tag -a ${version} -m "tag ${version}"
