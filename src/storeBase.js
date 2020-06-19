@@ -3,6 +3,7 @@ import { request } from '@src';
 export const createStore = (store) => {
 
     store.records = [];
+
     store.model.set = (data) => {
         Object.keys(data).forEach((key) => {
             store.model[key] = data[key];
@@ -11,13 +12,6 @@ export const createStore = (store) => {
     };
 
     return {
-        name: '',
-        store: {},
-
-        resetStore: () => {
-            store.records = [];
-            window.globalStorage.setStore({ data: window.globalStorage.data })
-        },
 
         setRecords: (mapped) => {
             store.records = mapped;
@@ -26,10 +20,9 @@ export const createStore = (store) => {
 
         getRecords: () => {
             if (store.records.length > 0) {
-                return store.records[0];
+                return store.records;
             }
-
-            return store.model;
+            return [store.model];
         },
 
         getRawRecords: () => {
@@ -61,9 +54,7 @@ export const createStore = (store) => {
 
             const presentResponse = (response) => {
                 if (typeof response.entries !== 'undefined') {
-                    store.records = response.entries.map((rec) => {
-                        return store.model.set(rec);
-                    });
+                    store.records = response.entries;
                 }
 
                 if (typeof response.pagination !== 'undefined') {

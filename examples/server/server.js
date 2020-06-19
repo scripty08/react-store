@@ -1,9 +1,10 @@
-import { Server, IndexController, Logger } from '@scripty/server';
+import { Server, IndexController } from '@scripty/server';
+import { ExampleController } from './example';
 
 const init = async () => {
-    Logger.info('server is initializing');
     let app = new Server();
     await app.addController(new IndexController({ title: 'store' }));
+    await app.addController(new ExampleController());
     app.start();
 };
 
