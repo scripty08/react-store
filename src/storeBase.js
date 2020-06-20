@@ -3,6 +3,7 @@ import { request } from '@src';
 export const createStore = (store) => {
 
     store.records = [];
+    store.updated = [];
 
     store.model.set = (data) => {
         Object.keys(data).forEach((key) => {
@@ -34,7 +35,11 @@ export const createStore = (store) => {
         },
 
         getPagination: () => {
-            return store.pagination
+            return store.pagination;
+        },
+
+        getUpdatedRecords: () => {
+            return store.updated;
         },
 
         getAt: (index) => {
@@ -59,6 +64,10 @@ export const createStore = (store) => {
 
                 if (typeof response.pagination !== 'undefined') {
                     store.pagination = response.pagination;
+                }
+
+                if (typeof response.pagination !== 'undefined') {
+                    store.updated = response.updated;
                 }
 
                 window.globalStorage.setStore({ data: window.globalStorage.data })
