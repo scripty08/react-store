@@ -1,8 +1,0 @@
-version: '3'
-
-services:
-  "store":
-    image: registry.garic.biz/skeletons/store:latest
-    container_name: store
-    restart: unless-stopped
-
