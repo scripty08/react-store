@@ -19,9 +19,6 @@
     "bundle": "webpack --config webpack.config.prod.cjs --colors",
     "compile": "node node_modules/@babel/cli/bin/babel.js src --out-dir lib --copy-files"
   },
-  "publishConfig": {
-    "registry": "https://nexus.garic.biz/repository/npm-registry/"
-  },
   "dependencies": {
     "@scripty/server": "^0.1.0",
     "axios": "^0.19.2",
