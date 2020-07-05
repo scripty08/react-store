@@ -68,12 +68,11 @@ import { useStore } from '@scripty/react-store';
 export const Example = () => {
 
     const { exampleStore } = useStore('exampleStore');
+    const records = exampleStore.getRecords();
 
     useEffect(() => {
         exampleStore.getProxy().read({})
     }, []);
-
-    let records = exampleStore.getRecords();
 
     const onBtnClick = () => {
         exampleStore.getProxy().create({test: 3})
