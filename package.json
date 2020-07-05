@@ -1,6 +1,6 @@
 {
   "name": "@scripty/react-store",
-  "version": "0.3.0",
+  "version": "0.5.0",
   "author": "Danijel Garic",
   "license": "MIT",
   "description": "",
@@ -11,7 +11,7 @@
   "extension": "js",
   "jsnext:main": "src/index.jsx",
   "main": "lib/index.js",
-  "repository": "scripty/store",
+  "repository": "scripty08/react-store",
   "scripts": {
     "webpack": "node node_modules/webpack/bin/webpack.js --config webpack.config.cjs",
     "start": "SET NODE_ENV=development&& nodemon --no-warnings --es-module-specifier-resolution=node ./examples/server/server.js",
