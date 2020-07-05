@@ -1,15 +1,9 @@
 .idea/
 examples/**/*
-build/
-public/
 .babelrc
 .editorconfig
 .gitignore
 .npmrc
 .serverc
-Dockerfile
-Jenkinsfile
 .env
-config.json
-docker-compose*.yml
 webpack.config*.cjs

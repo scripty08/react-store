@@ -1,6 +1,0 @@
-{
-  "logger": {
-    "logPrefix": "store",
-    "logLevel": "trace"
-  }
-}
