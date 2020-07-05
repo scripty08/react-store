@@ -1,6 +1,6 @@
 {
   "name": "@scripty/react-store",
-  "version": "0.1.0",
+  "version": "0.5.0",
   "author": "Danijel Garic",
   "license": "MIT",
   "description": "",
@@ -11,16 +11,16 @@
   "extension": "js",
   "jsnext:main": "src/index.jsx",
   "main": "lib/index.js",
-  "repository": "scripty/store",
+  "repository": "scripty08/react-store",
   "scripts": {
     "webpack": "node node_modules/webpack/bin/webpack.js --config webpack.config.cjs",
-    "start": "nodemon --no-warnings --es-module-specifier-resolution=node ./examples/server/server.js",
+    "start": "SET NODE_ENV=development&& nodemon --no-warnings --es-module-specifier-resolution=node ./examples/server/server.js",
     "start:prod": "node --no-warnings --es-module-specifier-resolution=node ./examples/server/server.js",
     "bundle": "webpack --config webpack.config.prod.cjs --colors",
     "compile": "node node_modules/@babel/cli/bin/babel.js src --out-dir lib --copy-files"
   },
   "dependencies": {
-    "@scripty/server": "^0.1.0",
+    "@scripty/server": "^0.2.0",
     "axios": "^0.19.2",
     "prop-types": "^15.7.2",
     "react": "16.11.0",

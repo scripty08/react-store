@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { useStore } from '../../src';
 
 export const Example = () => {
@@ -10,7 +10,6 @@ export const Example = () => {
     }, []);
 
     let records = exampleStore.getRecords();
-    console.log(records, ' records <------------');
 
     const onBtnClick = () => {
         exampleStore.getProxy().create({test: 3})
