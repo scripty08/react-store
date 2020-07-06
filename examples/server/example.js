@@ -9,7 +9,7 @@ export class ExampleController {
 
     readAction(req, res) {
         res.json({
-            entries: [
+            data: [
                 {
                     test: 1
                 },
@@ -22,7 +22,7 @@ export class ExampleController {
 
     createAction(req, res) {
         res.json({
-            entries: [
+            data: [
                 {
                     test: 1
                 },
@@ -38,7 +38,7 @@ export class ExampleController {
 
     searchAction(req, res) {
         res.json({
-            entries: [
+            data: [
                 {
                     test: req.body.query
                 }

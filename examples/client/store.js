@@ -9,9 +9,7 @@ export default createStore({
         ]
     },
     proxy: {
-        pagination: false,
-        rootProperty: 'entries',
-        responseType: 'array',
+        rootProperty: 'data',
         api: {
             read: {
                 url: '/example/read',

@@ -6,14 +6,15 @@ export class Store {
     constructor(store) {
 
         const { name, model, proxy} = store;
-        const { api } = proxy;
+        const { api, rootProperty } = proxy;
 
         this.name = name;
         this.model = model;
-        this.proxy = this.getProxy(api);
+        this.proxy = this.getProxy(api, rootProperty);
         this.data = [new Model(model)];
         this.rawData = [];
         this.filteredData = [];
+        this.pagination = [];
     }
 
     createModel(data) {
@@ -22,13 +23,13 @@ export class Store {
         return model;
     }
 
-    getProxy(api) {
+    getProxy(api, rootProperty) {
         if (api) {
             let proxy = {};
             Object.keys(api).forEach((key) => {
                 proxy[key] = async (data) => {
                     let response = await request(api[key].method, api[key].url, data);
-                    this.present(response);
+                    this.present(response, rootProperty);
                     return response;
                 }
             });
@@ -36,11 +37,15 @@ export class Store {
         }
     }
 
-    present (response) {
-        if (typeof response.entries !== 'undefined') {
-            this.rawData = response.entries;
-            this.data = this.getModelRecords(response.entries);
-            this.cachedData = this.getModelRecords(response.entries);
+    present (response, rootProperty) {
+        if (rootProperty) {
+            response = response[rootProperty]
+        }
+
+        if (typeof response !== 'undefined') {
+            this.rawData = response;
+            this.data = this.getModelRecords(response);
+            this.cachedData = this.getModelRecords(response);
         }
 
         if (typeof response.pagination !== 'undefined') {
@@ -48,7 +53,8 @@ export class Store {
         }
 
         if (typeof response.pagination !== 'undefined') {
-            this.updated = response.updated;
+            this.updatedData = this.getModelRecords(response.updated);
+            this.rawUpdatedData = response.updated;
         }
 
         this.saveGlobalStore();
@@ -70,6 +76,10 @@ export class Store {
 
     getAt(index) {
         return this.data[index];
+    }
+
+    getPagination() {
+        return this.pagination;
     }
 
     filter(field, value) {
