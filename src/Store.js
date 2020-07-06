@@ -15,6 +15,8 @@ export class Store {
         this.rawData = [];
         this.filteredData = [];
         this.pagination = [];
+        this.updatedData = [];
+        this.rawUpdatedData = [];
     }
 
     createModel(data) {
@@ -52,7 +54,7 @@ export class Store {
             this.pagination = response.pagination;
         }
 
-        if (typeof response.pagination !== 'undefined') {
+        if (typeof response.updated !== 'undefined') {
             this.updatedData = this.getModelRecords(response.updated);
             this.rawUpdatedData = response.updated;
         }
