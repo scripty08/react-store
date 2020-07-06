@@ -5,7 +5,7 @@ export class Store {
 
     constructor(store) {
 
-        const { name, model, proxy} = store;
+        const { name, model, proxy } = store;
         const { api, rootProperty } = proxy;
 
         this.name = name;
@@ -14,7 +14,11 @@ export class Store {
         this.data = [new Model(model)];
         this.rawData = [];
         this.filteredData = [];
-        this.pagination = [];
+        this.pagination = {
+            total: 0,
+            page: 0,
+            results: 0
+        }
         this.updatedData = [];
         this.rawUpdatedData = [];
     }
@@ -39,7 +43,7 @@ export class Store {
         }
     }
 
-    present (response, rootProperty) {
+    present(response, rootProperty) {
         if (rootProperty) {
             response = response[rootProperty]
         }
@@ -63,7 +67,7 @@ export class Store {
     }
 
     callback() {
-        if(this.saveGlobalStore) {
+        if (this.saveGlobalStore) {
             this.saveGlobalStore();
         }
     }
@@ -78,10 +82,6 @@ export class Store {
 
     getAt(index) {
         return this.data[index];
-    }
-
-    getPagination() {
-        return this.pagination;
     }
 
     filter(field, value) {
@@ -119,7 +119,7 @@ export class Store {
     }
 
     setData(model) {
-        if(typeof model === 'array') {
+        if (typeof model === 'array') {
             model.forEach((record) => {
                 this.data.push(record);
             })
