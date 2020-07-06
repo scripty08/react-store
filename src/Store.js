@@ -40,6 +40,7 @@ export class Store {
         if (typeof response.entries !== 'undefined') {
             this.rawData = response.entries;
             this.data = this.getModelRecords(response.entries);
+            this.cachedData = this.getModelRecords(response.entries);
         }
 
         if (typeof response.pagination !== 'undefined') {
@@ -72,14 +73,24 @@ export class Store {
     }
 
     filter(field, value) {
+
         this.filteredData = this.data.filter((record) => {
-            return record[field].toString() === value;
+            if (record[field].toString() === value) {
+                return record;
+            }
         });
-        return this.filteredData;
+
+        if (this.filteredData.length > 0) {
+            this.data = this.filteredData;
+            return this.saveGlobalStore();
+        }
+
+        this.data = this.cachedData;
+        return this.data;
     }
 
     clearFilter() {
-        this.data = this.filteredData;
+        this.data = this.cachedData;
         this.saveGlobalStore();
     }
 
