@@ -36,7 +36,6 @@ export class ExampleController {
         })
     }
 
-
     searchAction(req, res) {
         res.json({
             entries: [

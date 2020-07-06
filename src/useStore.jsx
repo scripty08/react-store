@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+ import { useContext } from 'react';
 import { StoreContext, addStore, getStore } from '@src';
 
 export const useStore = (storeName) => {
