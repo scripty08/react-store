@@ -1,4 +1,5 @@
-export * from './Store';
+export * from './Context';
+export * from './Provider';
 export * from './useStore';
 export * from './request';
 export * from './helper';

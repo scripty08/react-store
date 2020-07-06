@@ -1,61 +1,70 @@
 import { request } from '@src';
+import { Store } from './Store';
 
 export const createStore = (store) => {
+    return new Store(store);
+}
 
-    store.records = [];
-    store.updated = [];
+/*const setModelEvents = (store) => {
+    let model = store.model;
 
-    store.model.set = (data) => {
+    model.set = (data) => {
         Object.keys(data).forEach((key) => {
-            store.model[key] = data[key];
+            model[key] = data[key];
         });
-        return store.model;
+        return model;
     };
 
-    return {
+    return store;
+}*/
 
-        setRecords: (mapped) => {
+/*const setStoreEvents = (store) => {
+
+        store.records = [];
+        store.updated = [];
+
+        store.setRecords = (mapped) => {
             store.records = mapped;
             window.globalStorage.setStore({ data: window.globalStorage.data })
-        },
+        };
 
-        getRecords: () => {
+        store.getRecords = () => {
             if (store.records.length > 0) {
                 return store.records;
             }
             return [store.model];
-        },
+        };
 
-        getRawRecords: () => {
+        store.getRawRecords = () => {
             if (store.records.length > 0) {
                 return store.records;
             }
 
             return [];
-        },
+        };
 
-        getPagination: () => {
+        store.getPagination = () => {
             return store.pagination;
-        },
+        };
 
-        getUpdatedRecords: () => {
+        store.getUpdatedRecords = () => {
             return store.updated;
-        },
+        };
 
-        getAt: (index) => {
+        store.getAt = (index) => {
             if (store.records.length > 0) {
                 return store.records[index];
             }
             return store.model;
-        },
+        };
 
-        getRecord: (key, value) => {
+        store.getRecord = (key, value) => {
             let filtered = store.records.filter((rec) => rec[key] === value);
             if (filtered.length > 0) return filtered[0];
             console.error(`[ERROR] record with key: "${key}" and value: "${value}" not found!`);
-        },
+        };
 
-        getProxy: () => {
+        store.getProxy = () => {
 
             const presentResponse = (response) => {
                 if (typeof response.entries !== 'undefined') {
@@ -84,6 +93,8 @@ export const createStore = (store) => {
             });
 
             return proxy;
-        }
-    }
-}
+        };
+
+
+    return store;
+}*/

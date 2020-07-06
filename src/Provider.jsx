@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { StoreContext } from './Context';
 
 window.globalStorage = {
     config: {},
@@ -10,11 +11,6 @@ window.globalStorage = {
     ],
     setStore: () => {}
 };
-
-export const StoreContext = React.createContext({
-    store: [],
-    setStore: () => {}
-});
 
 export const StoreProvider = (props) => {
     const { defaultStores } = props;

@@ -3,11 +3,13 @@ import { createStore } from '@src';
 export default createStore({
     name: 'exampleStore',
     model: {
-        test: 0
+        fields: [
+            { name: 'test', type: 'number' },
+            { name: 'bla', type: 'array' }
+        ]
     },
     proxy: {
-        rootProperty: 'entries',
-        pagination: false,
+        rootProperty: 'data',
         api: {
             read: {
                 url: '/example/read',
