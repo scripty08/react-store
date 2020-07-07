@@ -1,4 +1,3 @@
-
 export class Model {
 
     constructor(model, callback) {

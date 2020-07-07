@@ -1,6 +1,6 @@
 export const addStore = (store, name) => {
-    if (!window.globalStorage.data.some(person => {
-        return person.name === name
+    if (!window.globalStorage.data.some(storage => {
+        return storage.name === name
     })) {
         window.globalStorage.data.push(store);
     }
