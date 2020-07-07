@@ -45,20 +45,18 @@ export class Store {
 
     present(response, rootProperty) {
 
-        let updated;
-        let deleted;
-        let pagination;
-
-        if (response.updated) {
-            updated = response.updated;
+        if (typeof response.pagination !== 'undefined') {
+            this.pagination = response.pagination;
         }
 
-        if (response.deleted) {
-            updated = response.deleted;
+        if (typeof response.updated !== 'undefined') {
+            this.updatedData = this.getModelRecords(response.updated);
+            this.rawUpdatedData = response.updated;
         }
 
-        if (response.pagination) {
-            pagination = response.pagination;
+        if (typeof response.deleted !== 'undefined') {
+            this.deletedData = this.getModelRecords(response.deleted);
+            this.rawDeletedData = response.deleted;
         }
 
         if (rootProperty) {
@@ -69,20 +67,6 @@ export class Store {
             this.rawData = response;
             this.data = this.getModelRecords(response);
             this.cachedData = this.getModelRecords(response);
-        }
-
-        if (typeof pagination !== 'undefined') {
-            this.pagination = pagination;
-        }
-
-        if (typeof updated !== 'undefined') {
-            this.updatedData = this.getModelRecords(updated);
-            this.rawUpdatedData = updated;
-        }
-
-        if (typeof deleted !== 'undefined') {
-            this.deletedData = this.getModelRecords(deleted);
-            this.rawDeletedData = deleted;
         }
 
         this.saveGlobalStore();
