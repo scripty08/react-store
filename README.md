@@ -6,8 +6,10 @@ This lightweight global react hook store is inspired by the extjs store architec
 Share your stores through your application with only a few lines of code!
 
 # Usage
+```bash
+npm install @scripty/react-store
+```
 
-##
 ##### Client: App.jsx
 This is an example App. You have to set the StoreProvider and set also all stores you want to provide
  to the app.
