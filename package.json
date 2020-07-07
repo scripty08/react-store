@@ -1,12 +1,21 @@
 {
   "name": "@scripty/react-store",
-  "version": "0.7.3",
+  "version": "0.7.5",
   "author": "Danijel Garic",
   "license": "MIT",
   "description": "",
   "homepage": "https://garic.biz",
   "keywords": [
-    "react"
+    "react",
+    "hooks",
+    "hook-store",
+    "hook store",
+    "global store",
+    "react hook store",
+    "extjs",
+    "simple",
+    "easy",
+    "global"
   ],
   "extension": "js",
   "jsnext:main": "src/index.jsx",
