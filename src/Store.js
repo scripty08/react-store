@@ -44,6 +44,18 @@ export class Store {
     }
 
     present(response, rootProperty) {
+
+        let updated;
+        let deleted;
+
+        if (response.updated) {
+            updated = response.updated;
+        }
+
+        if (response.deleted) {
+            updated = response.deleted;
+        }
+
         if (rootProperty) {
             response = response[rootProperty]
         }
@@ -58,9 +70,14 @@ export class Store {
             this.pagination = response.pagination;
         }
 
-        if (typeof response.updated !== 'undefined') {
-            this.updatedData = this.getModelRecords(response.updated);
-            this.rawUpdatedData = response.updated;
+        if (typeof updated !== 'undefined') {
+            this.updatedData = this.getModelRecords(updated);
+            this.rawUpdatedData = updated;
+        }
+
+        if (typeof deleted !== 'undefined') {
+            this.deletedData = this.getModelRecords(deleted);
+            this.rawDeletedData = deleted;
         }
 
         this.saveGlobalStore();

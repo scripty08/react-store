@@ -32,7 +32,10 @@ export class ExampleController {
                 {
                     test: 3
                 }
-            ]
+            ],
+            updated: [{
+                test: 8
+            }]
         })
     }
 
