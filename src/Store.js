@@ -47,6 +47,7 @@ export class Store {
 
         let updated;
         let deleted;
+        let pagination;
 
         if (response.updated) {
             updated = response.updated;
@@ -54,6 +55,10 @@ export class Store {
 
         if (response.deleted) {
             updated = response.deleted;
+        }
+
+        if (response.pagination) {
+            pagination = response.pagination;
         }
 
         if (rootProperty) {
@@ -66,8 +71,8 @@ export class Store {
             this.cachedData = this.getModelRecords(response);
         }
 
-        if (typeof response.pagination !== 'undefined') {
-            this.pagination = response.pagination;
+        if (typeof pagination !== 'undefined') {
+            this.pagination = pagination;
         }
 
         if (typeof updated !== 'undefined') {
