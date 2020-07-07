@@ -2,7 +2,8 @@
 
 # Description
 
-This global react store is inspired by the extjs store architecture.
+This lightweight global react hook store is inspired by the extjs store architecture.
+Share your stores through your application with only a few lines of code!
 
 # Usage
 
