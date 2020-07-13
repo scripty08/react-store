@@ -1,4 +1,4 @@
-import { request } from '@src';
+import { request } from './';
 import { Model } from './Model';
 
 export class Store {

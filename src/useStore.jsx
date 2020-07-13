@@ -1,5 +1,5 @@
  import { useContext } from 'react';
-import { StoreContext, addStore, getStore } from '@src';
+import { StoreContext, addStore, getStore } from './';
 
 export const useStore = (storeName) => {
     let { store, setStore } = useContext(StoreContext);
