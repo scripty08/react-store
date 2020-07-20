@@ -50,12 +50,12 @@ export class Store {
         }
 
         if (typeof response.updated !== 'undefined') {
-            this.updatedData = this.getModelRecords(response.updated);
+            this.updatedData = this.getModelRecords(response.updated, this.model);
             this.rawUpdatedData = response.updated;
         }
 
         if (typeof response.deleted !== 'undefined') {
-            this.deletedData = this.getModelRecords(response.deleted);
+            this.deletedData = this.getModelRecords(response.deleted, this.model);
             this.rawDeletedData = response.deleted;
         }
 
@@ -65,8 +65,8 @@ export class Store {
 
         if (typeof response !== 'undefined') {
             this.rawData = response;
-            this.data = this.getModelRecords(response);
-            this.cachedData = this.getModelRecords(response);
+            this.data = this.getModelRecords(response, this.model);
+            this.cachedData = this.getModelRecords(response, this.model);
         }
 
         this.saveGlobalStore();
@@ -78,16 +78,88 @@ export class Store {
         }
     }
 
-    getModelRecords(data) {
-        return data.map((record) => {
-            let model = new Model(this.model, this.callback.bind(this));
-            model.set(record);
-            return model;
-        })
+
+    getModelRecords(data, model) {
+
+        let bla = data.map((record, index) => {
+            Object.keys(record).forEach((key) => {
+                if (Array.isArray(record[key])) {
+                    record[key].map((rec, idx) => {
+                        if (typeof model.fields !== 'undefined') {
+                            if (model.fields[idx].name === key) {
+                                return this.getModelRecords(data, {fields: model.fields[idx].fields});
+                            }
+                        }
+                    });
+                }
+            });
+
+            console.log(model, ' model <------------');
+
+            let newModel = new Model(model, this.callback.bind(this));
+            newModel.set(record);
+
+            return newModel;
+
+        });
+
+
+        console.log(bla, ' bla <------------');
+
+        return bla;
+
     }
+
+    /*getModelRecords(data) {
+
+        let bla =  data.map((record) => {
+            this.myArray = [];
+            this.response = [];
+            Object.keys(record).forEach((key) => {
+                if (Array.isArray(record[key])) {
+                    record[key].map((rec, idx) => {
+                        console.log(key, ' key <------------');
+                        if (typeof this.model.fields !== 'undefined') {
+                            if (this.model.fields[idx].name === key) {
+                                console.log(this.model.fields[idx], ' xxx <------------');
+                                let model = new Model(this.model.fields[idx], this.callback.bind(this));
+                                model.set(rec);
+                                this.response.push(model);
+                            }
+                        }
+                    });
+                } else {
+                    let model = new Model(this.model, this.callback.bind(this));
+                    model.set(record);
+                    this.response.push(model);
+                }
+            });
+
+            return this.response;
+        })
+
+        console.log(bla, ' bla <------------');
+        return bla;
+    }*/
 
     getAt(index) {
         return this.data[index];
+    }
+
+    getDirtyRecords() {
+        const dirtyData = this.data.map((record, idx) => {
+            if (record.dirty) {
+                return this.rawData[idx]
+            }
+        }).filter((rec) => {
+            return typeof rec !== 'undefined'
+        })
+
+        if (dirtyData.length > 0) {
+            return dirtyData;
+        }
+
+        return null;
     }
 
     filter(field, value) {

@@ -42,8 +42,12 @@ export const Example = () => {
     }
 
     const onChangeDataBtnClick = () => {
-        exampleStore.getAt(0).set({ test: 100 })
+        let record = exampleStore.getAt(0);
+        record.set({ test: 100 })
+        record.setDirty();
     }
+
+    console.log(exampleStore.data, ' data <------------');
 
     return (
         <Fragment>

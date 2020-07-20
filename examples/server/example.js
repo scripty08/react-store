@@ -11,10 +11,21 @@ export class ExampleController {
         res.json({
             data: [
                 {
-                    test: 1
+                    test: 1,
+                    bla: []
                 },
                 {
-                    test: 2
+                    test: 'ja',
+                    bla: [
+                        {
+                            ja: 'blub',
+                            jo: 'teee'
+                        },
+                        {
+                            ja: '111',
+                            jo: '222'
+                        }
+                    ]
                 }
             ]
         })

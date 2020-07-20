@@ -23,12 +23,17 @@ export class Model {
     }
 
     set(record) {
+
         Object.keys(record).forEach((key) => {
             this[key] = record[key];
         });
         if (this.callback) {
             this.callback();
         }
+    }
+
+    setDirty() {
+        this.dirty = true;
     }
 
     get(field) {
