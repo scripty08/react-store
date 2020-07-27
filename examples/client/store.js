@@ -4,8 +4,8 @@ export default createStore({
     name: 'exampleStore',
     model: {
         fields: [
-            { name: 'test', type: 'number' },
-            { name: 'bla', type: 'array' }
+            { name: 'test', type: 'number', default: 5000 },
+            { name: 'bla', type: 'array', default: ['arrayValue1', 'arrayValue2'] }
         ]
     },
     proxy: {

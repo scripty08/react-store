@@ -5,12 +5,14 @@ export const Example = () => {
 
     const { exampleStore } = useStore('exampleStore');
 
+    console.log(exampleStore, ' exampleStore <------------');
+
     useEffect(() => {
         exampleStore.proxy.read();
     }, []);
 
     const onBtnClick = () => {
-        exampleStore.proxy.create({ test: 3 });
+        exampleStore.proxy.create({ test: 6 });
     };
 
     const onInput = async (e) => {

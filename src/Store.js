@@ -43,6 +43,27 @@ export class Store {
         }
     }
 
+    getDirtyRecords() {
+        const dirtyData = this.data.map((record, idx) => {
+            if (record.dirty) {
+                delete record['dirty'];
+                delete record['callback'];
+                if (typeof this.rawData[idx] !== 'undefined') {
+                    return this.rawData[idx]
+                }
+                return this.data[idx]
+            }
+        }).filter((rec) => {
+            return typeof rec !== 'undefined'
+        })
+
+        if (dirtyData.length > 0) {
+            return dirtyData;
+        }
+
+        return null;
+    }
+
     present(response, rootProperty) {
 
         if (typeof response.pagination !== 'undefined') {
@@ -54,19 +75,22 @@ export class Store {
             this.rawUpdatedData = response.updated;
         }
 
-        if (typeof response.deleted !== 'undefined') {
-            this.deletedData = this.getModelRecords(response.deleted);
-            this.rawDeletedData = response.deleted;
+        if (typeof response.destroyed !== 'undefined') {
+            this.deletedData = this.getModelRecords(response.destroyed);
+            this.rawDeletedData = response.destroyed;
         }
 
         if (rootProperty) {
             response = response[rootProperty]
         }
 
-        if (typeof response !== 'undefined') {
+        if (typeof response !== 'undefined' && response.length > 0) {
             this.rawData = response;
             this.data = this.getModelRecords(response);
             this.cachedData = this.getModelRecords(response);
+        } else {
+            this.data = [new Model(this.model, this.callback.bind(this))];
+            this.cachedData = [new Model(this.model, this.callback.bind(this))];
         }
 
         this.saveGlobalStore();

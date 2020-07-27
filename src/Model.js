@@ -3,7 +3,7 @@ export class Model {
     constructor(model, callback) {
         this.callback = callback;
         model.fields.forEach((rec) => {
-            this[rec.name] = this.getInitialValue(rec.type)
+            this[rec.name] = (rec.default) ? rec.default : this.getInitialValue(rec.type)
         })
     }
 
@@ -29,6 +29,10 @@ export class Model {
         if (this.callback) {
             this.callback();
         }
+    }
+
+    setDirty() {
+        this.dirty = true;
     }
 
     get(field) {
