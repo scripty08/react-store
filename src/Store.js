@@ -124,7 +124,8 @@ export class Store {
 
         if (this.filteredData.length > 0) {
             this.data = this.filteredData;
-            return this.saveGlobalStore();
+            this.saveGlobalStore();
+            return this.data[0];
         }
 
         this.data = this.cachedData;
@@ -148,13 +149,24 @@ export class Store {
         this.saveGlobalStore();
     }
 
-    setData(model) {
+    add(model) {
         if (typeof model === 'array') {
             model.forEach((record) => {
                 this.data.push(record);
             })
         }
         this.data.push(model);
+        this.saveGlobalStore();
+    }
+
+    update(model) {
+        this.data = this.data.map((rec) => {
+            if (rec._id === model._id) {
+                return model;
+            }
+            return rec;
+        }).filter(rec => typeof rec !== 'undefined');
+
         this.saveGlobalStore();
     }
 

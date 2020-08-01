@@ -4,6 +4,7 @@ export default createStore({
     name: 'exampleStore',
     model: {
         fields: [
+            { name: '_id', type: 'string'},
             { name: 'test', type: 'number', default: 5000 },
             { name: 'bla', type: 'array', default: ['arrayValue1', 'arrayValue2'] }
         ]

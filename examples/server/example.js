@@ -11,6 +11,7 @@ export class ExampleController {
         res.json({
             data: [
                 {
+                    _id: 'test_id',
                     test: 1
                 },
                 {

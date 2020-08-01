@@ -26,7 +26,8 @@
     "start": "SET NODE_ENV=development&& nodemon --no-warnings --es-module-specifier-resolution=node ./examples/server/server.js",
     "start:prod": "node --no-warnings --es-module-specifier-resolution=node ./examples/server/server.js",
     "bundle": "webpack --config webpack.config.prod.cjs --colors",
-    "compile": "node node_modules/@babel/cli/bin/babel.js src --out-dir lib --copy-files"
+    "compile": "node node_modules/@babel/cli/bin/babel.js src --out-dir lib --copy-files",
+    "prerelease": "npm version prerelease && npm publish"
   },
   "dependencies": {
     "@scripty/server": "^0.2.0",

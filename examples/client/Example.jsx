@@ -5,8 +5,6 @@ export const Example = () => {
 
     const { exampleStore } = useStore('exampleStore');
 
-    console.log(exampleStore, ' exampleStore <------------');
-
     useEffect(() => {
         exampleStore.proxy.read();
     }, []);
@@ -27,12 +25,21 @@ export const Example = () => {
         exampleStore.removeAll();
     }
 
-    const onSetDataBtnClick = () => {
+    const onAddDataBtnClick = () => {
         let model = exampleStore.createModel({
             test: 8,
             bla: ['blub', 'ja']
         });
-        exampleStore.setData(model)
+        exampleStore.add(model);
+    }
+
+    const onUpdateDataBtnClick = () => {
+        let model = exampleStore.createModel({
+            _id: 'test_id',
+            test: 83333333,
+            bla: ['blub', 'ja']
+        });
+        exampleStore.update(model);
     }
 
     const onFilterDataClick = (e) => {
@@ -46,6 +53,8 @@ export const Example = () => {
     const onChangeDataBtnClick = () => {
         exampleStore.getAt(0).set({ test: 100 })
     }
+
+    console.log(exampleStore.data, ' exampleStore <------------');
 
     return (
         <Fragment>
@@ -70,7 +79,11 @@ export const Example = () => {
             </div>
             <br/><br/>
             <div style={{ display: 'inline-block', width: 130, float: 'left' }}>
-                <button onClick={onSetDataBtnClick}>Set Data</button>
+                <button onClick={onAddDataBtnClick}>Add Data</button>
+            </div>
+            <br/><br/>
+            <div style={{ display: 'inline-block', width: 130, float: 'left' }}>
+                <button onClick={onUpdateDataBtnClick}>Edit Data</button>
             </div>
             <br/><br/>
             <div style={{ display: 'inline-block', width: 130, float: 'left' }}>
