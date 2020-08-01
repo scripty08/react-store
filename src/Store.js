@@ -48,9 +48,6 @@ export class Store {
             if (record.dirty) {
                 delete record['dirty'];
                 delete record['callback'];
-                if (typeof this.rawData[idx] !== 'undefined') {
-                    return this.rawData[idx]
-                }
                 return this.data[idx]
             }
         }).filter((rec) => {
