@@ -19,8 +19,9 @@ export class Store {
             page: 0,
             results: 0
         }
-        this.updatedData = [];
-        this.rawUpdatedData = [];
+        this.updated = [];
+        this.removed = [];
+        this.created = [];
     }
 
     createModel(data) {
@@ -44,21 +45,11 @@ export class Store {
     }
 
     getDirtyRecords() {
-        const dirtyData = this.data.map((record, idx) => {
-            if (record.dirty) {
-                delete record['dirty'];
-                delete record['callback'];
-                return this.data[idx]
-            }
-        }).filter((rec) => {
-            return typeof rec !== 'undefined'
-        })
-
-        if (dirtyData.length > 0) {
-            return dirtyData;
-        }
-
-        return null;
+        return {
+            created: this.created,
+            updated: this.updated,
+            removed: this.removed
+        };
     }
 
     present(response, rootProperty) {
@@ -90,6 +81,9 @@ export class Store {
             this.cachedData = [new Model(this.model, this.callback.bind(this))];
         }
 
+        this.created = [];
+        this.updated = [];
+        this.removed = [];
         this.saveGlobalStore();
     }
 
@@ -134,23 +128,6 @@ export class Store {
         this.saveGlobalStore();
     }
 
-    removeAt(index) {
-        this.data.splice(index, 1);
-        this.rawData.splice(index, 1);
-        this.saveGlobalStore();
-    }
-
-    removeById(_id) {
-        this.data = this.data.filter(rec => rec._id !== _id);
-        this.saveGlobalStore();
-    }
-
-    removeAll() {
-        this.data.splice(0, this.data.length);
-        this.rawData.splice(0, this.rawData.length);
-        this.saveGlobalStore();
-    }
-
     add(model) {
         if (typeof model === 'array') {
             model.forEach((record) => {
@@ -158,6 +135,13 @@ export class Store {
             })
         }
         this.data.push(model);
+
+        if (!this.created.some(data => {
+            return JSON.stringify(data) === JSON.stringify(model)
+        })) {
+            this.created.push(model);
+        }
+
         this.saveGlobalStore();
     }
 
@@ -169,6 +153,33 @@ export class Store {
             return rec;
         }).filter(rec => typeof rec !== 'undefined');
 
+        if (!this.updated.some(data => {
+            return JSON.stringify(data) === JSON.stringify(model)
+        })) {
+            this.updated.push(model);
+        }
+
+        this.saveGlobalStore();
+    }
+
+    removeAt(index) {
+        this.data.splice(index, 1);
+        this.rawData.splice(index, 1);
+        this.saveGlobalStore();
+    }
+
+    removeById(_id) {
+        const removed = this.data.find(rec => rec._id === _id);
+        this.data = this.data.filter(rec => rec._id !== _id);
+        if (removed) {
+            this.removed.push(removed);
+        }
+        this.saveGlobalStore();
+    }
+
+    removeAll() {
+        this.data.splice(0, this.data.length);
+        this.rawData.splice(0, this.rawData.length);
         this.saveGlobalStore();
     }
 

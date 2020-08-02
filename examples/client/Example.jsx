@@ -58,6 +58,11 @@ export const Example = () => {
         exampleStore.getAt(0).set({ test: 100 })
     }
 
+    const onDirtyRecordsBtnClick = () => {
+        let dirty = exampleStore.getDirtyRecords();
+        console.log(dirty, ' dirty ---------------------- ');
+    }
+
     console.log(exampleStore.data, ' exampleStore <------------');
 
     return (
@@ -103,6 +108,10 @@ export const Example = () => {
             <br/><br/>
             <div style={{ display: 'inline-block', width: 130, float: 'left' }}>
                 <button onClick={onChangeDataBtnClick}>Change data</button>
+            </div>
+            <br/><br/>
+            <div style={{ display: 'inline-block', width: 130, float: 'left' }}>
+                <button onClick={onDirtyRecordsBtnClick}>Dirty Records</button>
             </div>
         </Fragment>
     );
