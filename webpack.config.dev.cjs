@@ -1,6 +1,7 @@
 const merge = require('webpack-merge');
 const {HotModuleReplacementPlugin} = require('webpack');
 const common = require('./webpack.config.cjs');
+const WebpackShellPlugin = require('webpack-shell-plugin');
 
 const config = {
     mode: 'development',
@@ -14,7 +15,10 @@ const config = {
         }
     },
     plugins: [
-        new HotModuleReplacementPlugin()
+        new HotModuleReplacementPlugin(),
+        new WebpackShellPlugin({
+            onBuildStart:['echo "Webpack Start"'],
+            onBuildEnd:['echo Server listening on: http://localhost:3000']})
     ],
     watchOptions: {
         poll: 1000,

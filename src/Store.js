@@ -140,6 +140,11 @@ export class Store {
         this.saveGlobalStore();
     }
 
+    removeById(_id) {
+        this.data = this.data.filter(rec => rec._id !== _id);
+        this.saveGlobalStore();
+    }
+
     removeAll() {
         this.data.splice(0, this.data.length);
         this.rawData.splice(0, this.rawData.length);

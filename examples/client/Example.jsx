@@ -21,6 +21,10 @@ export const Example = () => {
         exampleStore.removeAt(1);
     }
 
+    const onRemoveByIdBtnClick = () => {
+        exampleStore.removeById('test_id');
+    }
+
     const onRemoveAllBtnClick = () => {
         exampleStore.removeAll();
     }
@@ -72,6 +76,10 @@ export const Example = () => {
             <br/><br/>
             <div style={{ display: 'inline-block', width: 100, float: 'left' }}>
                 <button onClick={onRemoveBtnClick}>Remove</button>
+            </div>
+            <br/><br/>
+            <div style={{ display: 'inline-block', width: 100, float: 'left' }}>
+                <button onClick={onRemoveByIdBtnClick}>Remove By Id</button>
             </div>
             <br/><br/>
             <div style={{ display: 'inline-block', width: 130, float: 'left' }}>
